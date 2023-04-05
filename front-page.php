@@ -44,7 +44,7 @@
                   <p>
                     <?php echo get_the_excerpt() ?>
                   </p>
-                  <a href="#">Read More...</a>
+                  <a href="<?php echo the_permalink() ?>">Read More...</a>
                 </div>
               </article>
               
@@ -81,7 +81,7 @@
                   <small><?php echo get_the_date('M-d-Y') ?> </small>
                   <h3><?php echo the_title() ?></h3>
                   <?php echo get_the_excerpt() ?>
-                  <a href="#">Read More...</a>
+                  <a href="<?php echo the_permalink() ?>">Read More...</a>
                 </div>
               </div>
 
@@ -143,7 +143,7 @@
               <p>
                 <?php echo get_the_excerpt() ?>
               </p>
-              <a href="#">Read More...</a>
+              <a href="<?php echo the_permalink() ?>">Read More...</a>
             </div>
           </div>
           <?php
@@ -181,11 +181,11 @@
 
             <?php endif; ?>   
 
-          <picture>
+          <!-- <picture>
             <source src="<?php echo get_template_directory_uri() ?>./img/img-9-sm.webp" media="(max-width:719px)" />
             <source src="<?php echo get_template_directory_uri() ?>./img/img-9.webp" media="(min-width:720px)" />
             <img src="<?php echo get_template_directory_uri() ?>./img/img-9.webp" alt="blog-img" class="lazy" />
-          </picture>
+          </picture> -->
         </div>
       </div>
 
@@ -212,12 +212,12 @@
               <div class="card__lg__content">
                 <small><?php echo get_the_date('M-d-Y') ?></small>
                 <h3>
-                  <?php echo get_the_excerpt() ?>
+                  <?php echo the_title() ?>
                 </h3>
                 <p>
                   <?php echo get_the_excerpt() ?>
                 </p>
-                <a href="#">Read More...</a>
+                <a href="<?php echo the_permalink() ?>">Read More...</a>
               </div>
             </article>
             <?php
@@ -229,58 +229,35 @@
             ?>
           </div>
           <div class="feature__sidebar">
-            <div class="card__mini">
-              <small>Oct 21, 2022</small>
-              <h4>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia,
-                sit.
-              </h4>
-              <a href="#">Read More ...</a>
-            </div>
-            <div class="card__mini">
-              <small>Oct 21, 2022</small>
-              <h4>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia,
-                sit.
-              </h4>
-              <a href="#">Read More ...</a>
-            </div>
+            <?php
 
-            <div class="card__mini">
-              <small>Oct 21, 2022</small>
-              <h4>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia,
-                sit.
-              </h4>
-              <a href="#">Read More ...</a>
-            </div>
+            $args = array(
+              'post_type' => 'featurePost',
+              'posts_per_page' => 6,
+              
+            );
 
-            <div class="card__mini">
-              <small>Oct 21, 2022</small>
-              <h4>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia,
-                sit.
-              </h4>
-              <a href="#">Read More ...</a>
-            </div>
+            $newQuery = new WP_Query($args)
 
-            <div class="card__mini">
-              <small>Oct 21, 2022</small>
-              <h4>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia,
-                sit.
-              </h4>
-              <a href="#">Read More ...</a>
-            </div>
 
+            ?>
+
+            <?php if($newQuery->have_posts()) : while($newQuery->have_posts()) : $newQuery->the_post();  ?>
             <div class="card__mini">
-              <small>Oct 21, 2022</small>
+              <small><?php echo get_the_date('M-d-Y') ?></small>
               <h4>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia,
-                sit.
+              <?php echo the_title() ?>
               </h4>
-              <a href="#">Read More ...</a>
+              <?php echo the_content() ?>
+              <a href="<?php echo the_permalink() ?>">Read More ...</a>
             </div>
+            <?php
+              endwhile;
+              else:
+                echo "no available content";
+              endif;
+              wp_reset_postdata();
+            ?>
           </div>
         </div>
       </div>

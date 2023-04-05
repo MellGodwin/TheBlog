@@ -56,7 +56,7 @@
   
   a {
     text-decoration: none;
-    color: var(--dark);
+    color: var(--light);
   }
   
   a:hover {
@@ -193,7 +193,7 @@
   }
   
   .card__sm img {
-    width: 100%;
+    width: 50%;
     height: 15rem;
     object-fit: cover;
   }
@@ -546,4 +546,49 @@
   .fa-sun:before {
     content: "\f185";
   }
+
+
+/*theContent*/
+
+.theContent {
+    text-align:center;
+    padding:3rem 0;
+    background-color:#D7E0EF;
+
+
+    /* @media screen and (min-width 720px){
+
+    } */
+
+}
+
+.theContent img{
+  width:100%;
+  height:70%;
+  margin:0 auto;
+  align-items:center;
+  border:2px solid black;
   
+}
+.theContent__wrapper{
+  display:flex;
+  justify-content:space-between;
+}
+
+.theContent p{
+  max-width:45rem;
+  margin:0 auto;
+}
+.theContent h1{
+  font-size:2rem;
+}
+
+.theContent__item{
+  display:flex;
+  width:50%;
+  height:50%;
+}
+.theContent__item{
+  justify-content:space-around;
+  gap:1rem;
+}
